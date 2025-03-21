@@ -17,7 +17,7 @@ def resize_fn(img, size):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', default='data/GT')
-    parser.add_argument('--model',default="weights/checkpoint.pth")
+    parser.add_argument('--model',default="weights/checkpoints.pth")
     parser.add_argument('--scale',default=6)
     parser.add_argument('--output', default='output')
     parser.add_argument('--gpu', default='0')
@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
-    model_spec = torch.load(args.model)['model']
+    model_spec = torch.load(args.model)
     model = models.make(model_spec, load_sd=True).cuda()
 
     input_files = [f for f in os.listdir(args.input) if f.lower().endswith(('jpeg', 'jpg', 'png'))]
